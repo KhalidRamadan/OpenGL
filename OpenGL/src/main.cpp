@@ -45,7 +45,7 @@ int main(void)
 	Renderer renderer;
 	while (!glfwWindowShouldClose(window))
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		renderer.Clear();
 		renderer.Draw(va, ib, shader);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
