@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include <iostream>
 
 
 void GLClearError()
@@ -16,4 +15,15 @@ bool GLLogCall(const char* function, const char* file, int line)
 		return false;
 	}
 	return true;
+}
+
+
+void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const
+{
+	shader.Bind();
+	va.Bind();
+	ib.Bind();
+	unsigned int count = ib.GetCount();
+	//std::cout << count << std::endl;
+	GLCall(glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr));
 }
