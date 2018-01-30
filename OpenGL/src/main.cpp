@@ -2,7 +2,6 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <string>
-#include "Functions.h"
 
 #include "Renderer.h"
 #include "IndexBuffer.h"
@@ -29,62 +28,56 @@ int main(void)
 		 0.5f,  0.5f, // 2
 		-0.5f,  0.5f, // 3
 	};
-
 	unsigned int indices[] = {
 		0, 1, 2,
 		2, 3, 0
 	};
 	// ==================================================================================
 	// Vertex Array 
-	VertexArray va;
-
-	VertexBuffer vb(position, 4 * 2 * sizeof(float));
-
-	VertexBufferLayout layout;
-	layout.Push<float>(2);
-	va.AddBuffer(vb, layout);
-
-	//  Index Buffer
-	IndexBuffer ib(indices, 6);
-	// End Index Buffer
-
-	// shader 
-	std::string vertexShader = engine::read_file("shaders/vertex.shader");
-	std::string fragmentShader = engine::read_file("shaders/frag.shader");
-	unsigned int shader = CreateShader(vertexShader, fragmentShader);
-	glUseProgram(shader);
-	int location = glGetUniformLocation(shader, "u_Color");
-	ASSERT(location != -1);
-	float r = 0.0f;
-	float inc = 0.01f;
-	// end shader 
-
-	// Unbind 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-
-	while (!glfwWindowShouldClose(window))
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		VertexArray va;
+
+		VertexBuffer vb(position, 4 * 2 * sizeof(float));
+
+		VertexBufferLayout layout;
+		layout.Push<float>(2);
+		va.AddBuffer(vb, layout);
+
+		//  Index Buffer
+		IndexBuffer ib(indices, 6);
+		// End Index Buffer
+
+		// shader 
+		Shader shader("shaders/vertex.shader", "shaders/frag.shader");
+		shader.Bind();
+		shader.SetUniform4f("u_Color", 0.3f, 0.2f, 0.3f, 1.0f);
+		// end shader 
+
+		// Unbind 
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 
-		// bind 
 
-		//glBindBuffer(GL_ARRAY_BUFFER, buffer);
-		ib.Bind();
-
-		// draw
-		if (r < 1.0f) r += inc; else r = 0.0f;
-		glUniform4f(location, r, 0.5f, 0.3f, 1.0f);
-		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+		while (!glfwWindowShouldClose(window))
+		{
+			glClear(GL_COLOR_BUFFER_BIT);
 
 
-		
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+			// bind 
+
+			//glBindBuffer(GL_ARRAY_BUFFER, buffer);
+			ib.Bind();
+
+			// draw
+			GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+
+
+
+			glfwSwapBuffers(window);
+			glfwPollEvents();
+		}
+		glfwTerminate();
 	}
-	glDeleteShader(shader);
-	glfwTerminate();
 	return 0;
 }

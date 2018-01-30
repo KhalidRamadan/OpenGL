@@ -131,7 +131,6 @@
     <None Include="shaders\vertex.shader" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Functions.h" />
     <ClInclude Include="src\IndexBuffer.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Shader.h" />

@@ -39,9 +39,6 @@
     <None Include="shaders\vertex.shader" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Functions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
