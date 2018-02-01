@@ -1,16 +1,16 @@
+
+#if 0
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <string>
 
-#include "Renderer.h"
-#include "IndexBuffer.h"
-#include "VertexBuffer.h"
-#include "VertexBufferLayout.h"
-#include "VertexArray.h"
-#include "Shader.h"     
-
-
+#include "core/Renderer.h"
+#include "core/IndexBuffer.h"
+#include "core/VertexBuffer.h"
+#include "core/VertexBufferLayout.h"
+#include "core/VertexArray.h"
+#include "core/Shader.h"     
 
 int main(void)
 {
@@ -24,8 +24,8 @@ int main(void)
 
 	float position[] = {
 		-0.5f, -0.5f, // 0
-		 0.5f, -0.5f, // 1 
-		 0.5f,  0.5f, // 2
+		0.5f, -0.5f, // 1 
+		0.5f,  0.5f, // 2
 		-0.5f,  0.5f, // 3
 	};
 	unsigned int indices[] = {
@@ -53,3 +53,4 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
+#endif
