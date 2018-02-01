@@ -1,2 +1,2 @@
 # OpenGL
-Learning OpenGL
+OpenGL
