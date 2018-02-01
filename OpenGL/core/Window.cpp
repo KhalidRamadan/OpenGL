@@ -67,7 +67,10 @@ namespace core
 		return true;
 	}
 
-
+	void Window::setClearColor(math::vec4 color) const
+	{
+		glClearColor(color.x, color.y, color.z, color.w);
+	}
 
 
 	void Window::clear() const
@@ -81,6 +84,12 @@ namespace core
 		glfwSwapBuffers(m_Window);
 	}
 
+
+	void Window::close() const 
+	{
+		glfwSetWindowShouldClose(m_Window, true);
+	}
+
 	bool Window::closed() const
 	{
 		return glfwWindowShouldClose(m_Window) == 1;
@@ -90,7 +99,7 @@ namespace core
 	bool Window::isKeyPressed(unsigned int key) const
 	{
 
-		// todo:: Log this!
+		// todo:: Log input!
 		if (key >= MAX_KEYS)
 			return false;
 		return m_Keys[key];
@@ -98,7 +107,7 @@ namespace core
 
 	bool Window::isMouseButtonPressed(unsigned int button) const
 	{
-		// todo:: Log this!
+		// todo:: Log input!
 		if (button >= MAX_KEYS)
 			return false;
 		return m_MouseButtons[button];

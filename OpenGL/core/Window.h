@@ -4,6 +4,7 @@
 #include<GL\glew.h>
 #include<GLFW\glfw3.h>
 #include "ErrorHandler.h"
+#include "../math/vec4.h"
 
 
 #define MAX_KEYS 1024
@@ -22,12 +23,14 @@ namespace core
 		bool m_MouseButtons[MAX_BUTTONS];
 		double mx, my;
 	public:
-		Window();
+		//todo
+		//Window();
 		Window(const char *title, int width, int height);
 		~Window();
 		void update();
 		bool closed() const;
 		void clear() const;
+		void close() const;
 
 		inline int GetWidth() const { return m_Width; }
 		inline int GetHeight() const { return m_Height; }
@@ -36,6 +39,8 @@ namespace core
 		bool isKeyPressed(unsigned int key) const;
 		bool isMouseButtonPressed(unsigned int button) const;
 		void getMousePosition(double &x, double &y) const;
+
+		void setClearColor(math::vec4 color) const;
 
 	private:
 		bool init();

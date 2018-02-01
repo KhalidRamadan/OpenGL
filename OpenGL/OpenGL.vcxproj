@@ -135,6 +135,7 @@
     <ClCompile Include="math\vec3.cpp" />
     <ClCompile Include="math\vec4.cpp" />
     <ClCompile Include="oldmain.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\frag.shader" />
