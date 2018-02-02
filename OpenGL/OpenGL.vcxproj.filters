@@ -54,10 +54,14 @@
     <ClCompile Include="math\vec4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\frag.shader" />
     <None Include="shaders\vertex.shader" />
+    <None Include="shaders\frag1.shader" />
+    <None Include="shaders\frag2.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\IndexBuffer.h">

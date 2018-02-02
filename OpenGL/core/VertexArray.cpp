@@ -7,7 +7,11 @@ namespace core
 	VertexArray::VertexArray()
 	{
 		GLCall(glGenVertexArrays(1, &m_RendererID));
+		GLCall(glBindVertexArray(m_RendererID));
 	}
+
+
+
 
 	VertexArray::~VertexArray()
 	{

@@ -11,6 +11,7 @@ namespace core
 		std::string vertexShader = read_file(vertexpath.c_str());
 		std::string fragmentShader = read_file(fragmentpath.c_str());
 		m_RendererID = CreateShader(vertexShader, fragmentShader);
+		GLCall(glUseProgram(m_RendererID));
 	}
 
 	Shader::~Shader()
