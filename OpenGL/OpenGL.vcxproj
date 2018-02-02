@@ -135,12 +135,13 @@
     <ClCompile Include="math\vec3.cpp" />
     <ClCompile Include="math\vec4.cpp" />
     <ClCompile Include="oldmain.cpp" />
-    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\frag2.shader" />
     <None Include="shaders\frag1.shader" />
     <None Include="shaders\vertex.shader" />
+    <None Include="shaders\vertex1.shader" />
+    <None Include="shaders\vertex2.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ErrorHandler.h" />

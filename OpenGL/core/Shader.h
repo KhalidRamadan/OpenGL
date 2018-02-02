@@ -6,6 +6,7 @@
 #include<iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "../math/vec4.h"
 
 namespace core
 {
@@ -23,7 +24,8 @@ namespace core
 		void Unbind() const;
 
 		// Set Uniforms
-		void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3);
+		void SetUniform4f(const std::string& name, math::vec4 value);
+		void SetUniform1f(const std::string& name, float value);
 	private:
 		int GetUniformLocation(const std::string& name);
 		std::string read_file(const char* filepath);

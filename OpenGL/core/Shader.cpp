@@ -31,13 +31,17 @@ namespace core
 	}
 
 
-	void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
+	void Shader::SetUniform4f(const std::string& name, math::vec4 value)
 	{
 		int location = GetUniformLocation(name);
-		GLCall(glUniform4f(location, v0, v1, v2, v3));
+		GLCall(glUniform4f(location, value.x, value.y, value.z, value.w));
 	}
 
-
+	void Shader::SetUniform1f(const std::string& name, float value)
+	{
+		int location = GetUniformLocation(name);
+		GLCall(glUniform1f(location, value));
+	}
 
 	int Shader::GetUniformLocation(const std::string& name)
 	{
