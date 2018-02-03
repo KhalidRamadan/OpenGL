@@ -6,7 +6,9 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <string>
-
+#include<cmath>
+#include<math.h>
+#include<algorithm>
 
 // my headers 
 #include "core/Window.h"
@@ -35,8 +37,8 @@ int main()
 		// data
 		float vertices[] = {
 			// positions          // colors           // texture coords
-			0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-			0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+			0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,    1.0f, 1.0f,   // top right
+			0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,    1.0f, 0.0f,   // bottom right
 			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
 			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
 		};
@@ -64,14 +66,17 @@ int main()
 
 		// Texture 
 
-		shader.SetUniform1i("texture1", 0);
-		shader.SetUniform1i("texture2", 1);
+		float visible = 0.4f;
+
+		shader.SetUniform1f("vis", visible);
+		shader.SetUniform1i("texture1", 1);
+		shader.SetUniform1i("texture2", 2);
 
 		Texture texture1("textures/container.jpg");
 		Texture texture2("textures/awesomeface.png");
 
-		texture1.Bind(0); 
-		texture2.Bind(1);
+		texture1.Bind(1); 
+		texture2.Bind(2);
 
 
 		// drawing loop 
@@ -79,11 +84,15 @@ int main()
 		{
 			mywindow.clear();
 
-
-			timeValue = glfwGetTime();
-
 			if (mywindow.isKeyPressed(GLFW_KEY_ESCAPE) == 1) mywindow.close();
+			else if (mywindow.isKeyPressed(GLFW_KEY_UP) == 1) visible += 0.01f;
+			else if (mywindow.isKeyPressed(GLFW_KEY_DOWN) == 1) visible -= 0.01f;
+			
+			visible = std::max(0.0f, visible);
+			visible = std::min(1.0f, visible);
 
+			shader.SetUniform1f("vis", visible);
+			std::cout << visible << std::endl;
 			rend.Draw(va, ib, shader);
 
 			mywindow.update();

@@ -42,7 +42,6 @@ namespace core
 	void Texture::Bind(unsigned int TextureUnit) const
 	{
 		GLCall(glActiveTexture(GL_TEXTURE0 + TextureUnit));
-		std::cout << GL_TEXTURE0 + TextureUnit << std::endl;
 		GLCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 	}
 
