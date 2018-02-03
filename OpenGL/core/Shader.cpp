@@ -43,6 +43,12 @@ namespace core
 		GLCall(glUniform1f(location, value));
 	}
 
+	void Shader::SetUniform1i(const std::string& name, int value)
+	{
+		int location = GetUniformLocation(name);
+		GLCall(glUniform1i(location, value));
+	}
+
 	int Shader::GetUniformLocation(const std::string& name)
 	{
 		if (Cache.find(name) != Cache.end())

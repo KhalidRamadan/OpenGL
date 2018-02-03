@@ -54,6 +54,9 @@
     <ClCompile Include="math\vec4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\vertex.shader" />
@@ -61,6 +64,7 @@
     <None Include="shaders\frag2.shader" />
     <None Include="shaders\vertex2.shader" />
     <None Include="shaders\vertex1.shader" />
+    <None Include="shaders\frag.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\IndexBuffer.h">
@@ -105,5 +109,28 @@
     <ClInclude Include="math\math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="core\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\container.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\awesomeface.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\img1.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\wall.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\Small-mario.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

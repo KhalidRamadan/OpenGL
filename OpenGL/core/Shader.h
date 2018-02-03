@@ -26,6 +26,7 @@ namespace core
 		// Set Uniforms
 		void SetUniform4f(const std::string& name, math::vec4 value);
 		void SetUniform1f(const std::string& name, float value);
+		void SetUniform1i(const std::string& name, int value);
 	private:
 		int GetUniformLocation(const std::string& name);
 		std::string read_file(const char* filepath);
