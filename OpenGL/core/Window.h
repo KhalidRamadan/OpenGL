@@ -4,8 +4,7 @@
 #include<GL\glew.h>
 #include<GLFW\glfw3.h>
 #include "ErrorHandler.h"
-#include "../math/vec4.h"
-
+#include <glm/glm.hpp>
 
 #define MAX_KEYS 1024
 #define MAX_BUTTONS 32
@@ -40,7 +39,7 @@ namespace core
 		bool isMouseButtonPressed(unsigned int button) const;
 		void getMousePosition(double &x, double &y) const;
 
-		void setClearColor(math::vec4 color) const;
+		void setClearColor(glm::vec4 color) const;
 
 	private:
 		bool init();

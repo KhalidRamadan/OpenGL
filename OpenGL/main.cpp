@@ -10,6 +10,10 @@
 #include<math.h>
 #include<algorithm>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 // my headers 
 #include "core/Window.h"
 #include "core/Shader.h"
@@ -23,16 +27,12 @@
 int main()
 {
 	using namespace core;
-	using namespace math;
+
 	std::string name = "Hello OpenGL";
 	int width = 800;
 	int height = 600;
 	{
 		Window mywindow(name.c_str(), width, height);
-
-		int nrAttributes;
-		glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
-		std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
 
 		// data
 		float vertices[] = {
@@ -48,7 +48,7 @@ int main()
 			1, 2, 3    // second triangle
 		};
 
-		vec4 color(0.2f, 0.3f, 0.3f, 1.0f);
+		glm::vec4 color(0.2f, 0.3f, 0.3f, 1.0f);
 		mywindow.setClearColor(color);
 
 		VertexArray va;
@@ -85,14 +85,24 @@ int main()
 			mywindow.clear();
 
 			if (mywindow.isKeyPressed(GLFW_KEY_ESCAPE) == 1) mywindow.close();
-			else if (mywindow.isKeyPressed(GLFW_KEY_UP) == 1) visible += 0.01f;
-			else if (mywindow.isKeyPressed(GLFW_KEY_DOWN) == 1) visible -= 0.01f;
+			else if (mywindow.isKeyPressed(GLFW_KEY_UP) == 1) visible += 0.001f;
+			else if (mywindow.isKeyPressed(GLFW_KEY_DOWN) == 1) visible -= 0.001f;
 			
 			visible = std::max(0.0f, visible);
 			visible = std::min(1.0f, visible);
 
+			timeValue = (float)glfwGetTime();
+
+
+			glm::mat4 trans;
+			int scal = (int)(timeValue * 100) % 100;
+			float fscal = scal / 100.0f;
+			std::cout << scal << std::endl;
+			trans = glm::rotate(trans, timeValue, glm::vec3(1.0f, 1.0f, 1.0f));
+			trans = glm::scale(trans, glm::vec3(2.0, 2.0, 2.0f));
+
+			shader.SetUniformMatrix4fv("transform", trans);
 			shader.SetUniform1f("vis", visible);
-			std::cout << visible << std::endl;
 			rend.Draw(va, ib, shader);
 
 			mywindow.update();

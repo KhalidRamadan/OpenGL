@@ -6,7 +6,9 @@
 #include<iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "../math/vec4.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace core
 {
@@ -24,9 +26,10 @@ namespace core
 		void Unbind() const;
 
 		// Set Uniforms
-		void SetUniform4f(const std::string& name, math::vec4 value);
+		void SetUniform4f(const std::string& name, glm::vec4 value);
 		void SetUniform1f(const std::string& name, float value);
 		void SetUniform1i(const std::string& name, int value);
+		void SetUniformMatrix4fv(const std::string& name, glm::mat4 value);
 	private:
 		int GetUniformLocation(const std::string& name);
 		std::string read_file(const char* filepath);

@@ -31,7 +31,7 @@ namespace core
 	}
 
 
-	void Shader::SetUniform4f(const std::string& name, math::vec4 value)
+	void Shader::SetUniform4f(const std::string& name, glm::vec4 value)
 	{
 		int location = GetUniformLocation(name);
 		GLCall(glUniform4f(location, value.x, value.y, value.z, value.w));
@@ -47,6 +47,12 @@ namespace core
 	{
 		int location = GetUniformLocation(name);
 		GLCall(glUniform1i(location, value));
+	}
+
+	void Shader::SetUniformMatrix4fv(const std::string& name, glm::mat4 value)
+	{
+		int location = GetUniformLocation(name);
+		GLCall(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value)));
 	}
 
 	int Shader::GetUniformLocation(const std::string& name)

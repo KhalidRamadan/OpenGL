@@ -2,7 +2,6 @@
 #include "Window.h"
 
 
-
 namespace core
 {
 	Window::Window(const char *title, int width, int height)
@@ -67,7 +66,7 @@ namespace core
 		return true;
 	}
 
-	void Window::setClearColor(math::vec4 color) const
+	void Window::setClearColor(glm::vec4 color) const
 	{
 		glClearColor(color.x, color.y, color.z, color.w);
 	}
