@@ -10,6 +10,7 @@ namespace core
 
 	VertexBuffer::VertexBuffer(const void* data, unsigned int size)
 	{
+		m_Count = size / sizeof(float);
 		//std::cout << ((const float*)data)[2] << std::endl;
 		GLCall(glGenBuffers(1, &m_RendererID));
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID));

@@ -22,6 +22,7 @@ namespace core
 
 		unsigned char *data = stbi_load(image.c_str(), &m_Width, &m_Height, &m_NrChannels, 0);
 		unsigned int format = 0;
+
 		if (m_NrChannels == 3) format = GL_RGB;
 		else  if(m_NrChannels == 4) format = GL_RGBA;
 		if (data)

@@ -135,9 +135,10 @@
     <ClCompile Include="math\vec2.cpp" />
     <ClCompile Include="math\vec3.cpp" />
     <ClCompile Include="math\vec4.cpp" />
-    <ClCompile Include="oldmain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\CubeFragment.shader" />
+    <None Include="shaders\CubeVertex.shader" />
     <None Include="shaders\frag.shader" />
     <None Include="shaders\frag2.shader" />
     <None Include="shaders\frag1.shader" />
@@ -155,6 +156,7 @@
     <ClInclude Include="core\VertexBuffer.h" />
     <ClInclude Include="core\VertexBufferLayout.h" />
     <ClInclude Include="core\Window.h" />
+    <ClInclude Include="data.h" />
     <ClInclude Include="math\mat4.h" />
     <ClInclude Include="math\math.h" />
     <ClInclude Include="math\math_func.h" />
@@ -165,7 +167,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\awesomeface.png" />
+    <Image Include="textures\backgroundcube.jpg" />
     <Image Include="textures\container.jpg" />
+    <Image Include="textures\cube.jpg" />
     <Image Include="textures\img1.jpg" />
     <Image Include="textures\Small-mario.png" />
     <Image Include="textures\wall.jpg" />

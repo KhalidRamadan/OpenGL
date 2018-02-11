@@ -13,7 +13,7 @@ namespace core
 		VertexArray();
 		~VertexArray();
 
-		void AddBuffer(const core::VertexBuffer& vb, const core::VertexBufferLayout& layout);
+		void AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout);
 
 		void Bind() const;
 		void Unbind() const;

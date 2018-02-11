@@ -26,23 +26,24 @@ namespace core
 		//Window();
 		Window(const char *title, int width, int height);
 		~Window();
-		void update();
-		bool closed() const;
-		void clear() const;
-		void close() const;
-
+		void Update();
+		bool Closed() const;
+		void Clear() const;
+		void Close() const;
+		void EnableDepthTest() const;
+		void DisableDepthTest() const;
 		inline int GetWidth() const { return m_Width; }
 		inline int GetHeight() const { return m_Height; }
 
 		// input 
-		bool isKeyPressed(unsigned int key) const;
-		bool isMouseButtonPressed(unsigned int button) const;
-		void getMousePosition(double &x, double &y) const;
+		bool IsKeyPressed(unsigned int key) const;
+		bool IsMouseButtonPressed(unsigned int button) const;
+		void GetMousePosition(double &x, double &y) const;
 
-		void setClearColor(glm::vec4 color) const;
+		void SetClearColor(glm::vec4 color) const;
 
 	private:
-		bool init();
+		bool Init();
 
 		friend void window_resize(GLFWwindow *window, int width, int height);
 		friend void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

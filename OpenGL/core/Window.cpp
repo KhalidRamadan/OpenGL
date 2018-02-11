@@ -9,7 +9,7 @@ namespace core
 		m_Title = title;
 		m_Width = width;
 		m_Height = height;
-		if (init() == false)
+		if (Init() == false)
 			glfwTerminate();
 
 		for (int i = 0; i < MAX_KEYS; i++)
@@ -28,7 +28,7 @@ namespace core
 		glfwTerminate();
 	}
 
-	bool Window::init()
+	bool Window::Init()
 	{
 		if (!glfwInit())
 		{
@@ -66,17 +66,17 @@ namespace core
 		return true;
 	}
 
-	void Window::setClearColor(glm::vec4 color) const
+	void Window::SetClearColor(glm::vec4 color) const
 	{
 		glClearColor(color.x, color.y, color.z, color.w);
 	}
 
 
-	void Window::clear() const
+	void Window::Clear() const
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
-	void Window::update()
+	void Window::Update()
 	{
 
 		glfwPollEvents();
@@ -84,18 +84,29 @@ namespace core
 	}
 
 
-	void Window::close() const 
+	void Window::Close() const 
 	{
 		glfwSetWindowShouldClose(m_Window, true);
 	}
 
-	bool Window::closed() const
+	void Window::EnableDepthTest() const
+	{
+		glEnable(GL_DEPTH_TEST);
+	}
+
+	void Window::DisableDepthTest() const
+	{
+		glDisable(GL_DEPTH_TEST);
+	}
+
+
+	bool Window::Closed() const
 	{
 		return glfwWindowShouldClose(m_Window) == 1;
 	}
 	// input 
 
-	bool Window::isKeyPressed(unsigned int key) const
+	bool Window::IsKeyPressed(unsigned int key) const
 	{
 
 		// todo:: Log input!
@@ -104,7 +115,7 @@ namespace core
 		return m_Keys[key];
 	}
 
-	bool Window::isMouseButtonPressed(unsigned int button) const
+	bool Window::IsMouseButtonPressed(unsigned int button) const
 	{
 		// todo:: Log input!
 		if (button >= MAX_KEYS)
@@ -112,7 +123,7 @@ namespace core
 		return m_MouseButtons[button];
 	}
 
-	void Window::getMousePosition(double &x, double &y) const
+	void Window::GetMousePosition(double &x, double &y) const
 	{
 		x = mx;
 		y = my;

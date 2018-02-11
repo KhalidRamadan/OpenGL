@@ -39,9 +39,6 @@
     <ClCompile Include="core\ErrorHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="oldmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\mat4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -65,6 +62,8 @@
     <None Include="shaders\vertex2.shader" />
     <None Include="shaders\vertex1.shader" />
     <None Include="shaders\frag.shader" />
+    <None Include="shaders\CubeVertex.shader" />
+    <None Include="shaders\CubeFragment.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\IndexBuffer.h">
@@ -115,6 +114,9 @@
     <ClInclude Include="core\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\container.jpg">
@@ -130,6 +132,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="textures\Small-mario.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\cube.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\backgroundcube.jpg">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

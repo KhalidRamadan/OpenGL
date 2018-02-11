@@ -11,7 +11,8 @@ namespace core
 	{
 	public:
 		void Clear() const;
-		void Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const;
+		void DrawElements(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const;
+		void DrawArrays(const VertexArray& va, const core::VertexBuffer& vb, const VertexBufferLayout& layout, const Shader& shader) const;
 	};
 
 }
