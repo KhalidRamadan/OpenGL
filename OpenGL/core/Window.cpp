@@ -4,11 +4,12 @@
 
 namespace core
 {
-	Window::Window(const char *title, int width, int height)
+	Window::Window(const char *title, int width, int height) : deltaTime(0.0f), lastFrame(0.0f)
 	{
 		m_Title = title;
 		m_Width = width;
 		m_Height = height;
+		m_Camera = nullptr;
 		if (Init() == false)
 			glfwTerminate();
 
@@ -27,6 +28,12 @@ namespace core
 	{
 		glfwTerminate();
 	}
+
+	void Window::SetCamera(game::Camera &NewCamera)
+	{
+		m_Camera = &NewCamera;
+	}
+
 
 	bool Window::Init()
 	{
@@ -54,7 +61,7 @@ namespace core
 		// call back functions 
 		glfwSetWindowUserPointer(m_Window, this);
 		// glfwSetWindowSizeCallback
-
+	
 
 		glfwSetWindowSizeCallback(m_Window, window_resize);
 		glfwSetKeyCallback(m_Window, key_callback);
@@ -81,11 +88,24 @@ namespace core
 	}
 	void Window::Update()
 	{
-
+		float currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
 	}
 
+	void Window::ProcessInput()
+	{
+		if (IsKeyPressed(GLFW_KEY_ESCAPE))
+			Close();
+
+
+		if (IsKeyPressed(GLFW_KEY_W)) m_Camera->ProcessKeyboard(game::FORWARD, deltaTime);
+		if (IsKeyPressed(GLFW_KEY_S)) m_Camera->ProcessKeyboard(game::BACKWARD, deltaTime);
+		if (IsKeyPressed(GLFW_KEY_A)) m_Camera->ProcessKeyboard(game::LEFT, deltaTime);
+		if (IsKeyPressed(GLFW_KEY_D)) m_Camera->ProcessKeyboard(game::RIGHT, deltaTime);
+	}
 
 	void Window::Close() const
 	{
@@ -143,6 +163,20 @@ namespace core
 		y = my;
 	}
 
+	void Window::CallCamera(int index)
+	{
+		if (m_Camera == nullptr) return;
+		switch (index)
+		{
+		case 0: m_Camera->ProcessMouseMovement((float)mx, (float)my);
+			break;
+		case 1: m_Camera->ProcessMouseScroll((float)scroll);
+			break;
+		case 2: ProcessInput();
+			break;
+		}
+	}
+
 
 
 	// callback funtions 
@@ -155,12 +189,14 @@ namespace core
 	{
 		Window *win = (Window*)glfwGetWindowUserPointer(window);
 		win->m_Keys[key] = action != GLFW_RELEASE;
+		win->CallCamera(2);
 	}
 
 	void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 	{
 		Window *win = (Window*)glfwGetWindowUserPointer(window);
 		win->m_MouseButtons[button] = action != GLFW_RELEASE;
+
 	}
 
 	void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
@@ -168,17 +204,14 @@ namespace core
 		Window *win = (Window*)glfwGetWindowUserPointer(window);
 		win->mx = xpos;
 		win->my = ypos;
+		win->CallCamera(0);
 	}
 
 	void scroll_position_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
 		Window *win = (Window*)glfwGetWindowUserPointer(window);
-		if (win->fov >= 1.0f && win->fov <= 45.0f)
-			win->fov -= yoffset;
-		if (win->fov <= 1.0f)
-			win->fov = 1.0f;
-		if (win->fov >= 45.0f)
-			win->fov = 45.0f;
+		win->scroll = yoffset;
+		win->CallCamera(1);
 	}
 
 }

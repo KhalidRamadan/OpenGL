@@ -1,7 +1,11 @@
 #pragma once
 
+#include<GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <vector>
+
+namespace core { class Window; }
 
 namespace game
 {
@@ -11,15 +15,19 @@ namespace game
 		LEFT,
 		RIGHT
 	};
-
 	// Default camera values
 	const float YAW = -90.0f;
 	const float PITCH = 0.0f;
-	const float SPEED = 2.5f;
+	const float SPEED = 20.0f;
 	const float SENSITIVTY = 0.1f;
 	const float ZOOM = 45.0f;
+
 	class Camera
 	{
+	private:
+		bool firstMouse;
+		float lastX, lastY;
+
 	public:
 		// Camera Attributes
 		glm::vec3 Position;
@@ -34,26 +42,17 @@ namespace game
 		float MovementSpeed;
 		float MouseSensitivity;
 		float Zoom;
-
-		//Window *win = (Window*)glfwGetWindowUserPointer(window);
-		//// Constructor with vectors
-		//Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
-		//	   glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),float yaw = YAW, float pitch = PITCH) : 
-		//	Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
-		//{
-		//	Position = position;
-		//	WorldUp = up;
-		//	Yaw = yaw;
-		//	Pitch = pitch;
-		//	updateCameraVectors();
-		//}
-		//
-		//glm::mat4 GetViewMatrix()
-		//{
-		//	return glm::lookAt(Position, Position + Front, Up);
-		//}
-		//void KeyboardInput(const Window &window, glm::vec3 &cameraPos,
-		//	const glm::vec3 &cameraFront, const glm::vec3 &cameraUp, float cameraSpeed);
+		friend class core::Window;
+	public:
+		Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
+			float yaw = YAW, float pitch = PITCH);
+		glm::mat4 GetViewMatrix() const;
+	private:
+		void updateCameraVectors();
+		void ProcessKeyboard(Camera_Movement direction, float deltaTime);
+		void ProcessMouseMovement(float xpos, float ypos);
+		void ProcessMouseScroll(float yoffset);
 	};
 
 }

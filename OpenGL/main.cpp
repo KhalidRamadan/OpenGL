@@ -12,21 +12,8 @@
 
 // my headers 
 #include "core/graphics.h"
+#include "game/Camera.h"
 #include "data.h"
-
-
-
-using namespace core;
-
-void KeyboardInput(const Window &window, glm::vec3 &cameraPos, const glm::vec3 &cameraFront,
-	const glm::vec3 &cameraUp, float cameraSpeed)
-{
-	if (window.IsKeyPressed(GLFW_KEY_W)) cameraPos += cameraSpeed * cameraFront;
-	else if (window.IsKeyPressed(GLFW_KEY_S)) cameraPos -= cameraSpeed * cameraFront;
-	else if (window.IsKeyPressed(GLFW_KEY_A)) cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-	else if (window.IsKeyPressed(GLFW_KEY_D)) cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-}
-
 
 
 
@@ -37,28 +24,25 @@ int main()
 	int width = 800;
 	int height = 600;
 	{
-		Window mywindow(name.c_str(), width, height);
+		core::Window mywindow(name.c_str(), width, height);
+		core::VertexArray va;
+		core::VertexBuffer vb(vertices, sizeof(vertices));
+		core::IndexBuffer ib(indices, sizeof(indices));
+		core::VertexBufferLayout layout;
+		core::Shader shader("shaders/vertex.shader", "shaders/frag.shader");
+		core::Renderer rend;
+
 		glm::vec4 color(0.2f, 0.3f, 0.3f, 1.0f);
 		mywindow.SetClearColor(color);
-
-
-
-		VertexArray va;
-		VertexBuffer vb(vertices, sizeof(vertices));
-		IndexBuffer ib(indices, sizeof(indices));
-		VertexBufferLayout layout;
 		layout.Push<float>(3); // position 
 		//layout.Push<float>(3); // color
 		layout.Push<float>(2); // texture
 		va.AddBuffer(vb, layout);
-		Shader shader("shaders/vertex.shader", "shaders/frag.shader");
-		Renderer rend;
 
-		float timeValue;
 
 		// Texture 
-		Texture t1("textures/container.jpg");
-		Texture t2("textures/awesomeface.png");
+		core::Texture t1("textures/container.jpg");
+		core::Texture t2("textures/awesomeface.png");
 
 		shader.SetUniform1i("texture1", 0);
 		shader.SetUniform1i("texture2", 1);
@@ -69,58 +53,33 @@ int main()
 		shader.SetUniform1f("vis", 0.4f);
 
 		mywindow.EnableDepthTest();
-		mywindow.DisableCursore();
-		glm::vec3 cameraPos		= glm::vec3(0.0f, 0.0f,  6.0f);
-		glm::vec3 cameraFront	= glm::vec3(0.0f, 0.0f, -1.0f);
-		glm::vec3 cameraUp		= glm::vec3(0.0f, 1.0f,  0.0f);
+		//mywindow.DisableCursore();
+
+		game::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+
+		mywindow.SetCamera(camera);
 
 
-		glm::mat4 model;
-		glm::mat4 projection;
-		glm::mat4 view;
+		glm::mat4 model; glm::mat4 projection; glm::mat4 view;
 
-		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-		projection = glm::perspective(glm::radians(45.0f), (float)(width / height), 0.1f, 100.0f);
-
-
-		shader.SetUniformMatrix4fv("model", model);
-		shader.SetUniformMatrix4fv("projection", projection);
-		shader.SetUniformMatrix4fv("view", view);
-
-		float deltaTime = 0.0f;	// Time between current frame and last frame
-		float lastFrame = 0.0f; // Time of last frame
 		// drawing loop 
 		while (!mywindow.Closed())
 		{
 			mywindow.Clear();
 
-			if (mywindow.IsKeyPressed(GLFW_KEY_ESCAPE)) mywindow.Close();			
-			if (mywindow.IsKeyPressed(GLFW_KEY_E)) mywindow.EnableCursore();
-			if (mywindow.IsKeyPressed(GLFW_KEY_C)) mywindow.DisableCursore();
-			float currentFrame = glfwGetTime();
-			deltaTime = currentFrame - lastFrame;
-			lastFrame = currentFrame;
-			float speed = 2.5f * deltaTime;
-			float radius = 10.0f;
-			float camX = sin(glfwGetTime()) * radius;
-			float camZ = cos(glfwGetTime()) * radius;
-			//glm::mat4 view;
-			//view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+			projection = glm::perspective(glm::radians(camera.Zoom), (float)(width / height), 0.1f, 100.0f);
 
-			KeyboardInput(mywindow, cameraPos, cameraFront, cameraUp, speed);
-			//view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-			shader.SetUniformMatrix4fv("view", view);
+			view = camera.GetViewMatrix();
 
-
-
-			//rend.DrawElements(va, ib, shader);
 			for (int i = 0; i < 10; i++)
 			{
 				float angle = 50.0f;
-				angle = glfwGetTime() * angle;
+				angle = ((float)glfwGetTime() * angle);
 				model = glm::translate(glm::mat4(), cubePositions[i]);
-				model = glm::rotate(model, glm::radians(50.0f), glm::vec3(1.0f, 0.3f, 0.5f));
+				model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
 				shader.SetUniformMatrix4fv("model", model);
+				shader.SetUniformMatrix4fv("projection", projection);
+				shader.SetUniformMatrix4fv("view", view);
 				rend.DrawArrays(va, vb, layout, shader);
 			}
 			mywindow.Update();

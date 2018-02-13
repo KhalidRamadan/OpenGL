@@ -18,6 +18,7 @@ namespace core
 	private:
 		unsigned int m_RendererID;
 		std::unordered_map<std::string, int> Cache;
+		
 	public:
 		Shader(const std::string& vertexpath, const std::string& fragmentpath);
 		~Shader();
