@@ -91,8 +91,10 @@ namespace core
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
+		ProcessInput();
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
+
 	}
 
 	void Window::ProcessInput()
@@ -189,7 +191,6 @@ namespace core
 	{
 		Window *win = (Window*)glfwGetWindowUserPointer(window);
 		win->m_Keys[key] = action != GLFW_RELEASE;
-		win->CallCamera(2);
 	}
 
 	void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)

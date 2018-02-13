@@ -67,9 +67,8 @@ namespace game
 
 	void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
 	{
-		std::cout << direction << "    " << 1.0f / deltaTime << std::endl;
 
-		float velocity = MovementSpeed;
+		float velocity = MovementSpeed * deltaTime;
 		if (direction == FORWARD)
 			Position += Front * velocity;
 		if (direction == BACKWARD)

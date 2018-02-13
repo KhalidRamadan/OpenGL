@@ -125,6 +125,7 @@
     <ClCompile Include="game\Camera.cpp" />
     <ClCompile Include="core\IndexBuffer.cpp" />
     <ClCompile Include="core\Texture.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="game\World.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="core\Renderer.cpp" />

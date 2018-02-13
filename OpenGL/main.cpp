@@ -1,3 +1,6 @@
+#if 1
+
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -53,7 +56,7 @@ int main()
 		shader.SetUniform1f("vis", 0.4f);
 
 		mywindow.EnableDepthTest();
-		//mywindow.DisableCursore();
+		mywindow.DisableCursore();
 
 		game::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -63,9 +66,13 @@ int main()
 		glm::mat4 model; glm::mat4 projection; glm::mat4 view;
 
 		// drawing loop 
+
+		float deltaTime = 0.0f;
+		float lastFrame = 0.0f;
 		while (!mywindow.Closed())
 		{
 			mywindow.Clear();
+
 
 			projection = glm::perspective(glm::radians(camera.Zoom), (float)(width / height), 0.1f, 100.0f);
 
@@ -91,3 +98,4 @@ int main()
 	return 0;
 }
 
+#endif
