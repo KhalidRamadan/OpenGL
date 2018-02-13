@@ -122,8 +122,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="game\Camera.cpp" />
     <ClCompile Include="core\IndexBuffer.cpp" />
     <ClCompile Include="core\Texture.cpp" />
+    <ClCompile Include="game\World.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="core\Renderer.cpp" />
     <ClCompile Include="core\Shader.cpp" />
@@ -147,6 +149,8 @@
     <None Include="shaders\vertex2.shader" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\graphics.h" />
+    <ClInclude Include="game\Camera.h" />
     <ClInclude Include="core\ErrorHandler.h" />
     <ClInclude Include="core\IndexBuffer.h" />
     <ClInclude Include="core\Renderer.h" />
@@ -156,6 +160,7 @@
     <ClInclude Include="core\VertexBuffer.h" />
     <ClInclude Include="core\VertexBufferLayout.h" />
     <ClInclude Include="core\Window.h" />
+    <ClInclude Include="game\World.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="math\mat4.h" />
     <ClInclude Include="math\math.h" />

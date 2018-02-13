@@ -54,10 +54,13 @@ namespace core
 		// call back functions 
 		glfwSetWindowUserPointer(m_Window, this);
 		// glfwSetWindowSizeCallback
+
+
 		glfwSetWindowSizeCallback(m_Window, window_resize);
 		glfwSetKeyCallback(m_Window, key_callback);
 		glfwSetMouseButtonCallback(m_Window, mouse_button_callback);
 		glfwSetCursorPosCallback(m_Window, cursor_position_callback);
+		glfwSetScrollCallback(m_Window, scroll_position_callback);
 		if (glewInit() != GLEW_OK)
 		{
 			std::cout << "Could not initizalize GLEW" << std::endl;
@@ -84,7 +87,7 @@ namespace core
 	}
 
 
-	void Window::Close() const 
+	void Window::Close() const
 	{
 		glfwSetWindowShouldClose(m_Window, true);
 	}
@@ -97,6 +100,17 @@ namespace core
 	void Window::DisableDepthTest() const
 	{
 		glDisable(GL_DEPTH_TEST);
+	}
+
+	void Window::EnableCursore() const
+	{
+		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
+
+
+	void Window::DisableCursore() const
+	{
+		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
 
 
@@ -154,6 +168,17 @@ namespace core
 		Window *win = (Window*)glfwGetWindowUserPointer(window);
 		win->mx = xpos;
 		win->my = ypos;
+	}
+
+	void scroll_position_callback(GLFWwindow* window, double xoffset, double yoffset)
+	{
+		Window *win = (Window*)glfwGetWindowUserPointer(window);
+		if (win->fov >= 1.0f && win->fov <= 45.0f)
+			win->fov -= yoffset;
+		if (win->fov <= 1.0f)
+			win->fov = 1.0f;
+		if (win->fov >= 45.0f)
+			win->fov = 45.0f;
 	}
 
 }

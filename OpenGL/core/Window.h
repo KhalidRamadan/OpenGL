@@ -1,10 +1,12 @@
 #pragma once
 #include<iostream>
 #include<string>
-#include<GL\glew.h>
-#include<GLFW\glfw3.h>
+#include<GL/glew.h>
+#include<GLFW/glfw3.h>
 #include "ErrorHandler.h"
 #include <glm/glm.hpp>
+#include "../game/Camera.h"
+
 
 #define MAX_KEYS 1024
 #define MAX_BUTTONS 32
@@ -20,7 +22,7 @@ namespace core
 		bool m_Closed;
 		bool m_Keys[MAX_KEYS];
 		bool m_MouseButtons[MAX_BUTTONS];
-		double mx, my;
+		double mx, my, fov; // X mouse position , Y mouse posistion , field of view 
 	public:
 		//todo
 		//Window();
@@ -32,6 +34,8 @@ namespace core
 		void Close() const;
 		void EnableDepthTest() const;
 		void DisableDepthTest() const;
+		void EnableCursore() const;
+		void DisableCursore() const;
 		inline int GetWidth() const { return m_Width; }
 		inline int GetHeight() const { return m_Height; }
 
@@ -49,5 +53,7 @@ namespace core
 		friend void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 		friend void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 		friend void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+		friend void scroll_position_callback(GLFWwindow* window, double xoffset, double yoffset);
+		friend class game::Camera;
 	};
 }
