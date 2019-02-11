@@ -3,9 +3,9 @@
 #include<string>
 #include<GL/glew.h>
 #include<GLFW/glfw3.h>
-#include "ErrorHandler.h"
+#include "ErrorHandler.hpp"
 #include <glm/glm.hpp>
-#include "../game/Camera.h"
+#include "../game/Camera.hpp"
 
 
 

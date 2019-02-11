@@ -1,5 +1,5 @@
-#include "VertexArray.h"
-#include "VertexBufferLayout.h"
+#include "VertexArray.hpp"
+#include "VertexBufferLayout.hpp"
 
 namespace core
 {

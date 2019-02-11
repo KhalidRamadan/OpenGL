@@ -14,9 +14,9 @@
 #include <glm/gtc/type_ptr.hpp>
 
 // my headers 
-#include "core/graphics.h"
-#include "game/Camera.h"
-#include "data.h"
+#include "core/graphics.hpp"
+#include "game/Camera.hpp"
+#include "data.hpp"
 
 
 
@@ -45,7 +45,7 @@ int main()
 
 		// Texture 
 		core::Texture t1("textures/container.jpg");
-		core::Texture t2("textures/awesomeface.png");
+		core::Texture t2("textures/Small-mario.png");
 
 		shader.SetUniform1i("texture1", 0);
 		shader.SetUniform1i("texture2", 1);

@@ -1,7 +1,7 @@
-#include "Texture.h"
+#include "Texture.hpp"
 #include "GL/glew.h"
 #include "stb_image.h"
-#include "ErrorHandler.h"
+#include "ErrorHandler.hpp"
 #include<iostream>
 namespace core
 {

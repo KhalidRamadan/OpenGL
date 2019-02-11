@@ -1,7 +1,7 @@
 #pragma once
 
-#include "VertexBuffer.h"
-#include "VertexBufferLayout.h"
+#include "VertexBuffer.hpp"
+#include "VertexBufferLayout.hpp"
 
 namespace core
 {

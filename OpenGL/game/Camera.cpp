@@ -2,7 +2,7 @@
 
 // 3D FPS
 
-#include "Camera.h"
+#include "Camera.hpp"
 #include<iostream>
 namespace game
 {

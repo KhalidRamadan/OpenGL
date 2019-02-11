@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <GL/glew.h>
-#include "ErrorHandler.h"
+#include "ErrorHandler.hpp"
 
 
 namespace core

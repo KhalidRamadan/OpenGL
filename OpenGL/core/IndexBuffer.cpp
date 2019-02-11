@@ -1,6 +1,6 @@
-#include "IndexBuffer.h"
-#include "ErrorHandler.h"
-#include "Renderer.h"
+#include "IndexBuffer.hpp"
+#include "ErrorHandler.hpp"
+#include "Renderer.hpp"
 
 namespace core
 {

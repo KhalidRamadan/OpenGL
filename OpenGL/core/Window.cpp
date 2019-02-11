@@ -1,5 +1,5 @@
 
-#include "Window.h"
+#include "Window.hpp"
 
 
 namespace core
@@ -88,7 +88,7 @@ namespace core
 	}
 	void Window::Update()
 	{
-		float currentFrame = glfwGetTime();
+		float currentFrame = (float)glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		ProcessInput();

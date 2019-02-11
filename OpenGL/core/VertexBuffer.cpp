@@ -1,6 +1,6 @@
-#include "VertexBuffer.h"
+#include "VertexBuffer.hpp"
 
-#include "Renderer.h"
+#include "Renderer.hpp"
 #include <iostream>
 
 
